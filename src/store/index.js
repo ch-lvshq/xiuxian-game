@@ -55,9 +55,10 @@ export default new Vuex.Store({
     huzonghj: 0,
     julinglv: '-1',
     julingxl: 0,
-    lingshi: 10000,
-    moling: 500,
-    lingdan: 500
+    lingshi: 0,
+    moling: 50000,
+    lingdan: 50000,
+    linglichi: 0
   },
   mutations: {
     addLingli (state) {
@@ -139,6 +140,9 @@ export default new Vuex.Store({
     },
     addjulingxl (state, num) {
       state.julingxl = num
+    },
+    addlinglichi (state, num) {
+      state.linglichi += num
     }
   },
   actions: {
