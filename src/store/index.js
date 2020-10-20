@@ -48,17 +48,27 @@ export default new Vuex.Store({
     zbzhanli: 0,
     zhanli: 0,
     time: 0,
-    beibao: [{ name: '朱雀剑', type: 1, use: { Catk: 0.15, Jatk: 0, Cdef: 0, Jdef: 10, Jhp: 0, Jmp: 0 }, value: '增加当前15%攻击力，10点防御力' }, { name: '玄武履', type: 2, use: { Catk: 0, Jatk: 10, Cdef: 0.10, Jdef: 0, Jhp: 0, Jmp: 0 }, value: '增加当前10点攻击力，10%防御力' }, { name: '青龙衣', type: 3, use: { Catk: 0.05, Jatk: 0, Cdef: 0.10, Jdef: 10, Jhp: 0, Jmp: 0 }, value: '增加当前5%攻击力，10%防御力' }, { name: '白虎宝', type: 4, use: { Catk: 0.10, Jatk: 0, Cdef: 0.05, Jdef: 10, Jhp: 0, Jmp: 0 }, value: '增加当前10%攻击力，5%防御力' }, { name: '元婴丹', type: '消耗品', value: '提升修为至元婴一阶', much: 10 }, { name: '轩辕剑', type: 1, use: { Catk: 1, Jatk: 0, Cdef: 0, Jdef: 0, Jhp: 0, Jmp: 0 }, value: '增加当前100%攻击力' }],
+    beibao: [{ name: '朱雀剑', type: 1, use: { Catk: 0.15, Jatk: 0, Cdef: 0, Jdef: 10, Jhp: 0, Jmp: 0 }, value: '增加当前15%攻击力，10点防御力' }, { name: '玄武履', type: 2, use: { Catk: 0, Jatk: 10, Cdef: 0.10, Jdef: 0, Jhp: 0, Jmp: 0 }, value: '增加当前10点攻击力，10%防御力' }, { name: '青龙衣', type: 3, use: { Catk: 0.05, Jatk: 0, Cdef: 0.10, Jdef: 10, Jhp: 0, Jmp: 0 }, value: '增加当前5%攻击力，10%防御力' }, { name: '白虎宝', type: 4, use: { Catk: 0.10, Jatk: 0, Cdef: 0.05, Jdef: 10, Jhp: 0, Jmp: 0 }, value: '增加当前10%攻击力，5%防御力' }, { name: '轩辕剑', type: 1, use: { Catk: 1, Jatk: 0, Cdef: 0, Jdef: 0, Jhp: 0, Jmp: 0 }, value: '增加当前100%攻击力' }],
     zhuangbei: ['', '', '', ''],
     zhuangbeival: [{ Catk: 0, Jatk: 0, Cdef: 0, Jdef: 0, Jhp: 0, Jmp: 0 }, { Catk: 0, Jatk: 0, Cdef: 0, Jdef: 0, Jhp: 0, Jmp: 0 }, { Catk: 0, Jatk: 0, Cdef: 0, Jdef: 0, Jhp: 0, Jmp: 0 }, { Catk: 0, Jatk: 0, Cdef: 0, Jdef: 0, Jhp: 0, Jmp: 0 }],
     huzonglv: '-1',
     huzonghj: 0,
     julinglv: '-1',
     julingxl: 0,
-    lingshi: 0,
+    lingshi: 10000000,
     moling: 50000,
     lingdan: 50000,
-    linglichi: 0
+    linglichi: 0,
+    mowu: [
+      { name: '初级魔物', pohuai: '1', zhanli: '20000', key: 0, time: 360, atk: 800, def: 500, hp: 2000, moling: 5 },
+      { name: '中级魔物', pohuai: '2', zhanli: '40000', key: 1, time: 1800, atk: 1500, def: 800, hp: 6000, moling: 25 },
+      { name: '高级魔物', pohuai: '5', zhanli: '80000', key: 2, time: 3600, atk: 2800, def: 1300, hp: 12000, moling: 50 },
+      { name: '特级魔物', pohuai: '10', zhanli: '200000', key: 3, time: 7200, atk: 4000, def: 5500, hp: 22000, moling: 100 },
+      { name: '王级魔物', pohuai: '20', zhanli: '400000', key: 4, time: 36000, atk: 10000, def: 6000, hp: 42000, moling: 500 },
+      { name: '皇级魔物', pohuai: '50', zhanli: '800000', key: 5, time: 180000, atk: 22000, def: 8000, hp: 502000, moling: 2500 }
+    ],
+    downhp: 0,
+    hjph: 0
   },
   mutations: {
     addLingli (state) {
@@ -143,6 +153,15 @@ export default new Vuex.Store({
     },
     addlinglichi (state, num) {
       state.linglichi += num
+    },
+    adddownhp (state, num) {
+      state.downhp += num
+    },
+    addhuzonghjN (state, num) {
+      state.huzonghj += num
+    },
+    addhjph (state, num) {
+      state.hjph = num
     }
   },
   actions: {

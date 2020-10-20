@@ -1,13 +1,13 @@
 <template>
   <div id="app">
     <div id="top-nav">
-    <div>修炼时长：{{Math.floor((Math.floor($store.state.time/30+1))/12)}}年{{(Math.floor($store.state.time/30+1))%12}}月{{($store.state.time)%30+1}}日</div>
+    <div>修炼时长：{{Math.floor((Math.floor($store.state.time/30+1))/12)}}年{{(Math.floor($store.state.time/30))%12+1}}月{{($store.state.time)%30+1}}日</div>
     <div>战力：{{$store.state.zhanli+$store.state.zbzhanli}}</div>
     </div>
     <router-view id="main"/>
     <div class="nav">
       <router-link to="/">个人</router-link> |
-      <router-link to="/zongmen">宗门</router-link> |
+      <router-link to="/zongmen"> 宗门<span id="zm">急</span></router-link> |
       <router-link to="/lilian">历练</router-link> |
       <router-link to="/chumo">除魔</router-link> |
     </div>
@@ -22,17 +22,31 @@ export default {
       () => {
         const a = (this.julingxl / 100 + 1) * this.linglixl
         this.addN(a)
+        if (this.downhp > this.hp / 100) {
+          this.adddownhp(-this.hp / 100)
+        } else {
+          this.adddownhp(-this.downhp)
+        }
       }, 1000
     )
     setInterval(
       () => this.addtime(), 1000
     )
+    setInterval(
+      () => {
+        this.addhuzonghjN(-this.hjph)
+        if (this.huzonghj < 0) {
+          alert('GAME OVER')
+          location.reload()
+        }
+      }, 1000
+    )
   },
   computed: {
-    ...mapState(['jjnum', 'csnum', 'lingli', 'atk', 'def', 'hp', 'mp', 'jjchongshu', 'jingjie', 'zhuangbeival', 'julingxl', 'linglixl'])
+    ...mapState(['jjnum', 'csnum', 'lingli', 'atk', 'def', 'hp', 'mp', 'jjchongshu', 'jingjie', 'zhuangbeival', 'julingxl', 'linglixl', 'downhp', 'huzonghj', 'hjph', 'time'])
   },
   methods: {
-    ...mapMutations(['addLingli', 'addN', 'addjj', 'addcsnum', 'addatk', 'adddef', 'addhp', 'addmp', 'addzhanli', 'addtime', 'addzbval', 'addzbzhanli'])
+    ...mapMutations(['addLingli', 'addN', 'addjj', 'addcsnum', 'addatk', 'adddef', 'addhp', 'addmp', 'addzhanli', 'addtime', 'addzbval', 'addzbzhanli', 'adddownhp', 'addhuzonghjN', 'addhjph'])
   },
   watch: {
     zhuangbeival: function () {
@@ -73,6 +87,28 @@ export default {
       this.addzbval(a)
       const zl = (Catk * this.atk + Jatk) * 10 + (Cdef * this.def + Jdef) * 15 + Jhp + Jmp
       this.addzbzhanli(zl)
+    },
+    time: function () {
+      if (this.time > 360 && this.time < 1800) {
+        this.addhjph(1)
+      } else if (this.time > 1800 && this.time < 3600) {
+        this.addhjph(2)
+      } else if (this.time > 3600 && this.time < 7200) {
+        this.addhjph(5)
+      } else if (this.time > 7200 && this.time < 36000) {
+        this.addhjph(10)
+      } else if (this.time > 36000 && this.time < 180000) {
+        this.addhjph(20)
+      } else if (this.time > 180000) {
+        this.addhjph(50)
+      }
+    },
+    huzonghj: function () {
+      if (this.hjph > 0 && this.huzonghj / this.hjph < 20) {
+        document.getElementById('zm').style.color = 'red'
+      } else {
+        document.getElementById('zm').style.color = 'aliceblue'
+      }
     }
   }
 }
@@ -101,5 +137,8 @@ a{
 }
 .nav a.router-link-exact-active {
   color: #42b983;
+}
+#zm{
+  color: aliceblue;
 }
 </style>

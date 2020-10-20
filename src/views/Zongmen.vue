@@ -16,6 +16,7 @@
         </ul>
         </div>
       <button @click="huzongup">升级</button>
+      <button @click="huzongnew">修复</button>
     </div><div v-else> <button @click="usehuzong">修建护宗大阵</button> </div></div>
     <div class="zmzf" style="background-color: #aaaaaa">
       <div v-if="this.julinglv!=='-1'">
@@ -62,7 +63,7 @@ export default {
     ...mapState(['huzonglv', 'lingshi', 'moling', 'huzonghj', 'lingdan', 'julinglv', 'julingxl'])
   },
   methods: {
-    ...mapMutations(['addhuzonglv', 'addlingshi', 'addmoling', 'addhuzonghj', 'addlingdan', 'addjulinglv', 'addjulingxl']),
+    ...mapMutations(['addhuzonglv', 'addlingshi', 'addmoling', 'addhuzonghj', 'addlingdan', 'addjulinglv', 'addjulingxl', 'addhuzonghjN']),
     huzongup: function () {
       const a = this.huzong[this.huzonglv].xiaohao
       if (this.lingshi >= a.lingshi && this.moling >= a.moling) {
@@ -73,6 +74,12 @@ export default {
       } else {
         alert('你的材料不足')
       }
+    },
+    huzongnew: function () {
+      const a = this.huzong[this.huzonglv].hj
+      const b = a - this.huzonghj
+      this.addmoling(-b)
+      this.addhuzonghjN(b)
     },
     julingup: function () {
       const a = this.juling[this.julinglv].xiaohao

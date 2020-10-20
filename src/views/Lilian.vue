@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="lilian-top">
     <div v-for="(item, key) in lilian" :key='key' class="lilian">
     <div>{{item.name}}</div>
     <div>详情</div>
@@ -43,13 +43,20 @@ export default {
       alert('你的灵力池增加了' + c + '点灵力' + ',' + '你的灵石增加了' + d)
     }
   }
-
 }
 </script>
 <style scoped>
 .lilian{
-  margin: 20px;
+  margin: auto;
+  margin-bottom: 20px;
   padding: 20px;
   background-color: aquamarine;
+  max-width: 800px;
+}
+.lilian-top{
+  padding-left: 20px;
+  display: block;
+  height: 400px;
+  overflow: scroll;
 }
 </style>

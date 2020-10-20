@@ -7,10 +7,10 @@
       <div @click="addNa" title='以两倍修炼速率提升灵力，直接破镜'>闭关修炼</div> <div @click="addNb">灵力池：{{this.linglichi}}</div>
     </div>
     <div>
-      <div>攻击力：{{atk+$store.state.zbval[0]*atk+$store.state.zbval[1]}}</div>
-      <div>防御力：{{def+$store.state.zbval[2]*def+$store.state.zbval[3]}}</div>
-      <div>生命值：{{hp+$store.state.zbval[4]}}</div>
-      <div>法力值：{{mp+$store.state.zbval[5]}}</div>
+      <div>攻击力：{{Math.floor(atk+$store.state.zbval[0]*atk+$store.state.zbval[1])}}</div>
+      <div>防御力：{{Math.floor(def+$store.state.zbval[2]*def+$store.state.zbval[3])}}</div>
+      <div>生命值：{{Math.floor(hp+$store.state.zbval[4]-$store.state.downhp)}}</div>
+      <div>法力值：{{Math.floor(mp+$store.state.zbval[5])}}</div>
     </div>
   </div>
 </template>
