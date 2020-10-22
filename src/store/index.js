@@ -34,6 +34,26 @@ export default new Vuex.Store({
       id: 4,
       name: '元婴',
       up: 800000
+    },
+    {
+      id: 5,
+      name: '未知境界',
+      up: 800000
+    },
+    {
+      id: 6,
+      name: '未知境界',
+      up: 800000
+    },
+    {
+      id: 7,
+      name: '未知境界',
+      up: 800000
+    },
+    {
+      id: 8,
+      name: '未知境界',
+      up: 800000
     }
   ],
     jjnum: 0,

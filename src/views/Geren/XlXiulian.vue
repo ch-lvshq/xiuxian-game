@@ -17,6 +17,7 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex'
+import { myAlert } from '../../assets/myConsole'
 export default {
   name: 'XlXiulian',
   computed: {
@@ -27,6 +28,7 @@ export default {
     addLinglia () {
       const a = (this.julingxl / 100 + 1) * this.linglixl
       this.addN(a)
+      myAlert('你获得了' + a + '点灵力')
     },
     addNa () {
       const a = this.jingjie[this.jjnum].up - this.lingli
@@ -34,12 +36,16 @@ export default {
       const b = Math.ceil(a / (2 * c))
       this.addtime(b)
       this.addN(a)
+      myAlert('你闭关了' + b + '天，你的境界提升了')
     },
     addNb () {
       const a = this.jingjie[this.jjnum].up - this.lingli
       if (this.linglichi >= a) {
         this.addN(a)
         this.addlinglichi(-a)
+        myAlert('你消耗了' + a + '点灵力，你的境界提升了')
+      } else {
+        myAlert('你的灵力池中灵力不足以提升境界')
       }
     }
   }

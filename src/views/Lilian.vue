@@ -17,6 +17,7 @@
 
 <script>
 import { mapMutations, mapState } from 'vuex'
+import { myAlert } from '../assets/myConsole'
 export default {
   name: 'Lilian',
   data: function () {
@@ -40,7 +41,7 @@ export default {
       this.addlinglichi(c)
       const d = this.lilian[key].lingshi * a
       this.addlingshi(d)
-      alert('你的灵力池增加了' + c + '点灵力' + ',' + '你的灵石增加了' + d)
+      myAlert('你的灵力池增加了' + c + '点灵力' + ',' + '你的灵石增加了' + d)
     }
   }
 }

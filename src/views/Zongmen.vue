@@ -15,7 +15,7 @@
           <li v-for="(val, key) in  huzong[this.huzonglv].xiaohao" :key='key' >{{key}}:{{val}}</li>
         </ul>
         </div>
-      <button @click="huzongup">升级</button>
+      <button @click="huzongup" v-if="this.huzonglv<5">升级</button>
       <button @click="huzongnew">修复</button>
     </div><div v-else> <button @click="usehuzong">修建护宗大阵</button> </div></div>
     <div class="zmzf" style="background-color: #aaaaaa">
@@ -28,7 +28,7 @@
           <li v-for="(val, key) in  juling[this.julinglv].xiaohao" :key='key' >{{key}}:{{val}}</li>
         </ul>
         </div>
-      <button @click="julingup">升级</button>
+      <button @click="julingup" v-if="this.julinglv<5">升级</button>
     </div><div v-else> <button @click="usejuling">修建聚灵大阵</button> </div>
     </div>
     <div class="zmzf">宗门领地</div>
@@ -37,6 +37,7 @@
 </template>
 <script>
 import { mapState, mapMutations } from 'vuex'
+import { myAlert } from '../assets/myConsole'
 export default {
   name: 'Zongmen',
   data: function () {
@@ -72,14 +73,19 @@ export default {
         this.addhuzonglv()
         this.addhuzonghj(this.huzong[this.huzonglv].hj)
       } else {
-        alert('你的材料不足')
+        myAlert('你的材料不足')
       }
     },
     huzongnew: function () {
       const a = this.huzong[this.huzonglv].hj
       const b = a - this.huzonghj
-      this.addmoling(-b)
-      this.addhuzonghjN(b)
+      if (this.moling >= b) {
+        this.addmoling(-b)
+        this.addhuzonghjN(b)
+        myAlert('你消耗了' + b + '魔灵，修复了护宗大阵')
+      } else {
+        myAlert('你的魔灵不足')
+      }
     },
     julingup: function () {
       const a = this.juling[this.julinglv].xiaohao
@@ -89,7 +95,7 @@ export default {
         this.addjulinglv()
         this.addjulingxl(this.juling[this.julinglv].xl)
       } else {
-        alert('你的材料不足')
+        myAlert('你的材料不足')
       }
     },
     usehuzong: function () {

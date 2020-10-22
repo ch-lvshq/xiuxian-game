@@ -17,6 +17,7 @@
 
 <script>
 import { mapMutations, mapState } from 'vuex'
+import { myAlert } from '../assets/myConsole'
 export default {
   name: 'Chumo',
   computed: {
@@ -33,9 +34,15 @@ export default {
       const cs = Math.floor(a.hp / yh)
       this.adddownhp(cs * mh)
       if (Math.floor(this.hp + this.$store.state.zbval[4] - this.$store.state.downhp < 0)) {
-        alert('GAME OVER')
+        const bool = confirm('你的血量清空，游戏结束，按确定重新开始，取消退出游戏')
+        if (bool) {
+          location.reload()
+        } else {
+          window.open('https://github.com/ch-lvshq/xiuxian-game', '_self')
+        }
       }
       this.addmoling(Number(a.moling))
+      myAlert('你损失了' + Math.floor(cs * mh) + '点血量,你获得了' + Number(a.moling) + '魔灵')
     }
   }
 }

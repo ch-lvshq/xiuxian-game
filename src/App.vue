@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="top-nav">
-    <div>修炼时长：{{Math.floor((Math.floor($store.state.time/30+1))/12)}}年{{(Math.floor($store.state.time/30))%12+1}}月{{($store.state.time)%30+1}}日</div>
+    <div>修炼时长：{{Math.floor((Math.floor($store.state.time/30))/12)}}年{{(Math.floor($store.state.time/30))%12+1}}月{{($store.state.time)%30+1}}日</div>
     <div>战力：{{$store.state.zhanli+$store.state.zbzhanli}}</div>
     </div>
     <router-view id="main"/>
@@ -36,8 +36,13 @@ export default {
       () => {
         this.addhuzonghjN(-this.hjph)
         if (this.huzonghj < 0) {
-          alert('GAME OVER')
-          location.reload()
+          this.addhuzonghjN(100000)
+          const bool = confirm('宗门被魔物攻破，游戏结束，按确定重新开始，取消退出游戏')
+          if (bool) {
+            location.reload()
+          } else {
+            window.open('https://github.com/ch-lvshq/xiuxian-game', '_self')
+          }
         }
       }, 1000
     )
