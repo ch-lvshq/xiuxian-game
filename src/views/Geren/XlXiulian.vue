@@ -3,8 +3,9 @@
     <div>
       <div>境界: {{jingjie[jjnum].name}}{{jjchongshu[csnum]}}</div>
       <div>灵力：{{ Math.ceil(lingli*10)/10 }}/{{jingjie[jjnum].up}}</div>
-      <div @click="addLinglia" title="每次点击会增长一倍修炼速率的灵力值">刻苦修炼</div>
-      <div @click="addNa" title='以两倍修炼速率提升灵力，直接破镜'>闭关修炼</div> <div @click="addNb">灵力池：{{this.linglichi}}</div>
+      <div><el-button type="primary" plain class="xl-but" @click="addLinglia">刻苦修炼</el-button> <How :val="'每次点击会增长一倍修炼速率的灵力值'"></How> </div>
+      <div><el-button type="primary" plain class="xl-but" @click="addNa">闭关修炼</el-button><How :val="'每次点击会以两倍修炼速率突破当前境界，消耗对应时间'"></How> </div>
+       <div> <el-button type="primary" plain class="xl-but" @click="addNb">灵力池：{{this.linglichi}}</el-button><How :val="'消耗灵力池中灵力，提升当前境界'"></How> </div>
     </div>
     <div>
       <div>攻击力：{{Math.floor(atk+$store.state.zbval[0]*atk+$store.state.zbval[1])}}</div>
@@ -18,8 +19,12 @@
 <script>
 import { mapState, mapMutations } from 'vuex'
 import { myAlert } from '../../assets/myConsole'
+import How from '../../components/How'
 export default {
   name: 'XlXiulian',
+  components: {
+    How
+  },
   computed: {
     ...mapState(['jjnum', 'csnum', 'lingli', 'atk', 'def', 'hp', 'mp', 'jjchongshu', 'jingjie', 'time', 'julingxl', 'linglixl', 'linglichi'])
   },
@@ -29,6 +34,7 @@ export default {
       const a = (this.julingxl / 100 + 1) * this.linglixl
       this.addN(a)
       myAlert('你获得了' + a + '点灵力')
+      this.$message('你获得了' + a + '点灵力')
     },
     addNa () {
       const a = this.jingjie[this.jjnum].up - this.lingli
@@ -37,6 +43,7 @@ export default {
       this.addtime(b)
       this.addN(a)
       myAlert('你闭关了' + b + '天，你的境界提升了')
+      this.$message('你闭关了' + b + '天，你的境界提升了')
     },
     addNb () {
       const a = this.jingjie[this.jjnum].up - this.lingli
@@ -44,10 +51,17 @@ export default {
         this.addN(a)
         this.addlinglichi(-a)
         myAlert('你消耗了' + a + '点灵力，你的境界提升了')
+        this.$message('你消耗了' + a + '点灵力，你的境界提升了')
       } else {
         myAlert('你的灵力池中灵力不足以提升境界')
+        this.$message('你的灵力池中灵力不足以提升境界')
       }
     }
   }
 }
 </script>
+<style scoped>
+.xl-but{
+  padding: 5px;
+}
+</style>

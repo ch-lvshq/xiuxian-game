@@ -10,7 +10,7 @@
         <option value="10">10</option>
         <option value="15">15</option>
         </select>  </div>
-         <div><button @click="addtimeup(key)">开始探索</button></div>
+         <div><button @click="addtimeup(key)">开始探索</button> <How :val="'消耗对应时间，获得灵力池灵力与对应灵石，暂不完善'"></How></div>
     </div>
   </div>
 </template>
@@ -18,8 +18,12 @@
 <script>
 import { mapMutations, mapState } from 'vuex'
 import { myAlert } from '../assets/myConsole'
+import How from '../components/How'
 export default {
   name: 'Lilian',
+  components: {
+    How
+  },
   data: function () {
     return {
       lilian: [

@@ -8,7 +8,7 @@
           <div>破坏力:{{mowu[key].pohuai}}</div>
           <div>破坏时间：{{mowu[key].pohuaitime}}</div>
           <div>战力值:{{mowu[key].zhanli}}</div>
-          <div><button @click="mowujg(key)">进攻</button></div>
+          <div><button @click="mowujg(key)">进攻</button> <How :val="'消灭对应魔物，获得魔灵'"></How></div>
         </div>
       </div>
     </div>
@@ -18,8 +18,12 @@
 <script>
 import { mapMutations, mapState } from 'vuex'
 import { myAlert } from '../assets/myConsole'
+import How from '../components/How'
 export default {
   name: 'Chumo',
+  components: {
+    How
+  },
   computed: {
     ...mapState(['time', 'mowu', 'atk', 'def', 'hp', 'zbval', 'downhp'])
   },

@@ -17,7 +17,7 @@
         </div>
       <button @click="huzongup" v-if="this.huzonglv<5">升级</button>
       <button @click="huzongnew">修复</button>
-    </div><div v-else> <button @click="usehuzong">修建护宗大阵</button> </div></div>
+    </div><div v-else> <el-button type="primary"  @click="usehuzong">修建护宗大阵</el-button> <How :val="'护宗大阵抵御魔物入侵，护宗大阵被攻破游戏失败'"></How> </div></div>
     <div class="zmzf" style="background-color: #aaaaaa">
       <div v-if="this.julinglv!=='-1'">
       <div>聚灵大阵</div>
@@ -29,17 +29,21 @@
         </ul>
         </div>
       <button @click="julingup" v-if="this.julinglv<5">升级</button>
-    </div><div v-else> <button @click="usejuling">修建聚灵大阵</button> </div>
+    </div><div v-else> <el-button type="primary" @click="usejuling">修建聚灵大阵</el-button> <How :val="'聚灵大阵提供额外的修炼速率'"></How> </div>
     </div>
-    <div class="zmzf">宗门领地</div>
+    <div class="zmzf">宗门领地 <How :val="'宗门领地会提供各种修炼资源，暂时还未开放'"></How></div>
   </div>
 </div>
 </template>
 <script>
 import { mapState, mapMutations } from 'vuex'
 import { myAlert } from '../assets/myConsole'
+import How from '../components/How'
 export default {
   name: 'Zongmen',
+  components: {
+    How
+  },
   data: function () {
     return {
       huzong: [
